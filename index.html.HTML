@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <title>Deployment Flowchart + Clean Ishikawa Fishbone</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://img.freepik.com/free-vector/background-realistic-abstract-technology-particle_23-2148431735.jpg?semt=ais_hybrid&w=740') no-repeat center center fixed;
+      background-size: cover;
+      padding: 40px;
+      margin: 0;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 60px;
+      min-height: 100vh;
+    }
+    h2 {
+      margin-bottom: 30px;
+      text-shadow: 0 0 5px rgba(0,0,0,0.7);
+    }
+    /* Deployment Flowchart Styles */
+    .swimlane-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.9);
+      position: relative;
+      width: 1000px;
+      min-height: 600px;
+      color: #333;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+    .lane-header {
+      background-color: #dee2e6;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      border-right: 1px solid #ccc;
+      user-select: none;
+      color: #333;
+    }
+    .lane-header:last-child {
+      border-right: none;
+    }
+    .lane-content {
+      border-right: 1px solid #ddd;
+      padding: 20px;
+      position: relative;
+      min-height: 580px;
+    }
+    .lane-content:last-child {
+      border-right: none;
+    }
+    .task {
+      background-color: #e9f7fe;
+      border: 1px solid #90caf9;
+      padding: 10px 14px;
+      border-radius: 5px;
+      margin-bottom: 40px;
+      font-size: 14px;
+      position: relative;
+      text-align: center;
+      color: #333;
+    }
+    .decision {
+      background-color: #fff4e5;
+      border: 2px solid #f4a261;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 40px auto;
+      position: relative;
+      transform: rotate(45deg);
+      box-shadow: 0 0 8px rgba(244,162,97,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e76f51;
+      font-weight: bold;
+      font-size: 14px;
+      user-select: none;
+    }
+    .decision > span {
+      display: block;
+      transform: rotate(-45deg);
+      width: 100px;
+      text-align: center;
+    }
+    .label-yes, .label-no {
+      position: absolute;
+      font-size: 12px;
+      font-weight: bold;
+      color: #e76f51;
+      user-select: none;
+      background: #fff4e5;
+      padding: 2px 6px;
+      border-radius: 3px;
+      border: 1px solid #f4a261;
+      pointer-events: none;
+    }
+    .label-yes {
+      top: 260px;
+      left: 730px;
+    }
+    .label-no {
+      top: 325px;
+      left: 590px;
+    }
+    svg.arrows {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      width: 1000px;
+      height: 600px;
+      overflow: visible;
+    }
+    .task:not(.decision):not(:last-child)::after {
+      content: "↓";
+      position: absolute;
+      right: 50%;
+      top: 100%;
+      transform: translateX(50%);
+      font-size: 20px;
+      color: #555;
+    }
+    .lane-content .task:last-child:not(.decision)::after {
+      content: "";
+    }
+
+    /* Ishikawa container */
+    .ishikawa-container {
+      position: relative;
+      width: 1100px;
+      height: 700px;
+      user-select: none;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+      background: rgba(255 255 255 / 0.9);
+      border-radius: 10px;
+      padding: 10px;
+      color: #064273;
+    }
+    /* Custom labels */
+    .ishikawa-label {
+      position: absolute;
+      font-weight: 700;
+      font-size: 22px;
+      color: #064273;
+      text-shadow: 1px 1px 1px rgba(255 255 255 / 0.8);
+      pointer-events: none;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .problem {
+      top: 320px;
+      left: 1020px;
+      font-size: 28px;
+    }
+    .planning {
+      top: 150px;
+      left: 190px;
+    }
+    .tools {
+      top: 80px;
+      left: 340px;
+    }
+    .presentation {
+      top: 140px;
+      left: 520px;
+    }
+    .design {
+      top: 470px;
+      left: 540px;
+    }
+    .review {
+      top: 510px;
+      left: 370px;
+    }
+    .content {
+      top: 570px;
+      left: 170px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Website Deployment Flowchart</h2>
+
+  <div class="swimlane-container">
+    <!-- Headers -->
+    <div class="lane-header">Planning</div>
+    <div class="lane-header">Development</div>
+    <div class="lane-header">Testing & QA</div>
+    <div class="lane-header">Deployment & Operations</div>
+
+    <!-- Planning -->
+    <div class="lane-content">
+      <div class="task">Define website goals</div>
+      <div class="task">Gather requirements</div>
+      <div class="task">Create wireframes and UI mockups</div>
+    </div>
+
+    <!-- Development -->
+    <div class="lane-content">
+      <div class="task">Code frontend (HTML/CSS/JS)</div>
+      <div class="task">Develop backend (APIs, DB)</div>
+      <div class="task">Push code to Git</div>
+    </div>
+
+    <!-- Testing & QA -->
+    <div class="lane-content">
+      <div class="task decision"><span>Tests passed?</span></div>
+      <div class="task">Fix bugs & optimize performance</div>
+      <div class="task">Cross-browser & mobile testing</div>
+    </div>
+
+    <!-- Deployment & Ops -->
+    <div class="lane-content">
+      <div class="task">Setup hosting/server</div>
+      <div class="task">Configure domain and SSL</div>
+      <div class="task">Deploy to production (CI/CD)</div>
+      <div class="task">Monitor site & backups</div>
+      <div class="task">🎉 Website goes live!</div>
+    </div>
+
+    <!-- Labels above arrows -->
+    <div class="label-yes">Yes</div>
+    <div class="label-no">No</div>
+
+    <!-- SVG arrows for decision and loop -->
+    <svg class="arrows" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" >
+      <defs>
+        <marker id="arrowhead" markerWidth="8" markerHeight="6"
+          refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#e76f51"/>
+        </marker>
+      </defs>
+      <path d="M700 280 L770 280" stroke="#e76f51" stroke-width="2.5" marker-end="url(#arrowhead)" fill="none"/>
+      <path d="M640 330 L640 360" stroke="#e76f51" stroke-width="2.5" marker-end="url(#arrowhead)" fill="none"/>
+      <path d="M540 420 C 520 480, 430 480, 430 350" stroke="#e76f51" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)"/>
+      <text x="460" y="510" fill="#e76f51" font-weight="bold" font-size="12">Loop back</text>
+    </svg>
+  </div>
+
+  <h2>Ishikawa Fishbone Diagram for Website Creation</h2>
+
+  <div class="ishikawa-container">
+    <!-- SVG fishbone diagram (clean, no text) -->
+    <svg viewBox="0 0 1100 700" width="1100" height="700" xmlns="http://www.w3.org/2000/svg" aria-label="Ishikawa Fishbone Diagram">
+      <!-- Fish backbone -->
+      <line x1="150" y1="350" x2="1000" y2="350" stroke="#064273" stroke-width="6" />
+      <!-- Fish head -->
+      <polygon points="1000,300 1100,350 1000,400" fill="#0b4a84" />
+      <!-- Branches top -->
+      <line x1="350" y1="350" x2="250" y2="170" stroke="#064273" stroke-width="5" />
+      <line x1="500" y1="350" x2="400" y2="80" stroke="#064273" stroke-width="5" />
+      <line x1="670" y1="350" x2="570" y2="140" stroke="#064273" stroke-width="5" />
+      <!-- Branches bottom -->
+      <line x1="350" y1="350" x2="250" y2="520" stroke="#064273" stroke-width="5" />
+      <line x1="500" y1="350" x2="400" y2="570" stroke="#064273" stroke-width="5" />
+      <line x1="670" y1="350" x2="570" y2="620" stroke="#064273" stroke-width="5" />
+    </svg>
+
+    <!-- Custom labels -->
+    <div class="ishikawa-label problem">Problem</div>
+    <div class="ishikawa-label planning">Planning</div>
+    <div class="ishikawa-label tools">Tools</div>
+    <div class="ishikawa-label presentation">Presentation</div>
+    <div class="ishikawa-label design">Design</div>
+    <div class="ishikawa-label review">Review</div>
+    <div class="ishikawa-label content">Content</div>
+  </div>
+
+</body>
+</html>
+
+
+
